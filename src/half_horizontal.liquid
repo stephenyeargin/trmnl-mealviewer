@@ -1,17 +1,40 @@
 <div class="layout layout--row layout--top">
-  <div class="grid grid--cols-2 gap--medium">
-    <div class="item">
-      <div class="meta"></div>
-      <div class="content">
-        <div class="label label--medium">Half Horizontal</div>
-        <div class="description">Replace me with your content!</div>
+  <div class="flex w--full gap--small">
+    {% for day in menuSchedules %}
+      {% if
+        day.dateInformation.weekNumber == currentWeek and
+        day.dateInformation.weekDay >= 2 and
+        day.dateInformation.weekDay <= 6
+      %}
+      <div class="col">
+        <div class="p--1 bg--gray-6 text-stroke">
+          <span class="label">{{ day.dateInformation.weekDayName }}</span>
+        </div>
+        {% for block in day.menuBlocks %}
+        {% if blocks_to_display contains block.blockName %}
+        <div>
+          <span class="my--2 label label--small label--underline">{{ block.blockName }}</span>
+        </div>
+        <div class="">
+          {% assign grouped_items = block.cafeteriaLineList.data.first.foodItemList.data | group_by: 'item_Type' %}
+          {% for group in grouped_items %}
+            <span class="description clamp--none">{{ group[0] }}: {{ group[1] | map: 'item_Name' | join: ', ' }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% else %}
+        <div>
+          <span class="description py--5">No meals today.</span>
+        </div>
+        {% endfor %}
       </div>
-    </div>
+      {% endif %}
+    {% endfor %}
   </div>
 </div>
 
 <div class="title_bar">
   <img class="image image-stroke--medium" src="data:image/svg+xml;base64,{{ logo_svg | base64_encode }}" />
-  <span class="title">Plugin Template</span>
+  <span class="title">{{ physicalLocation.name }} </span>
   <span class="instance">{{ trmnl.plugin_settings.instance_name }}</span>
 </div>

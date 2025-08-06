@@ -7,12 +7,15 @@ watch:
   - src
 
 # values of custom fields (defined in src/settings.yml)
-custom_fields: {}
+custom_fields: {
+  mealviewer_school_id: 'RosebankElementary',
+  mealviewer_blocks_to_display: "Breakfast,Lunch"
+}
 
 # override variables
 variables:
   trmnl: {
     plugin_settings: {
-      instance_name: 'My Instance'
+      instance_name: 'MealViewer'
     }
   }

@@ -1,4 +1,4 @@
-# TRMNL Plugin
+# MealViewer for TRMNL
 
 ![screenshot](assets/screenshot.png)
 

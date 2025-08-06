@@ -1,28 +1,35 @@
-#
-# Changes to this file will be overwritten by `trmnlp pull`.
-#
-# Docs: https://help.usetrmnl.com/en/articles/10542599-importing-and-exporting-private-plugins#h_581fb988f0
-#
 ---
 strategy: polling
 no_screen_padding: 'no'
 dark_mode: 'no'
 static_data: ''
 polling_verb: get
-polling_url: 'https://api.vercel.app/blog'
-polling_headers: 'content-type=application/json'
-name: Plugin Template
-refresh_interval: 1440
+polling_url: 'https://api.mealviewer.com/api/v4/school/{{ mealviewer_school_id }}/{{ ''now'' | date: ''%s'' | minus: 604800 | date: ''%Y-%m-%d'' }}/{{ ''now'' | date: ''%s'' | plus: 604800 | date: ''%Y-%m-%d'' }}/0'
+polling_headers: content-type=application/json
+polling_body:
+id: 133879
 custom_fields:
 - keyname: author_bio
   name: About This Plugin
   field_type: author_bio
-  description: This is template text you should probably update 😁
-  github_url: https://github.com/
-  learn_more_url: https://usetrmnl.com/
-  email_address: email@example.com
-- keyname: example_string
+  description: Shows school lunch menu via MealViewer.com
+  github_url: https://github.com/stephenyeargin/trmnl-mealviewer
+  learn_more_url: https://mealviewer.com
+  email_address: stephen@yearg.in
+- keyname: mealviewer_school_id
   field_type: string
-  name: A Configurable String
-  description: Save some data here for use in URLs or controlling the display
-  placeholder: An Example Value
+  name: School ID
+  description: The identifier for the school, usually found in the URL.
+  placeholder: SpringfieldElementary
+- keyname: mealviewer_blocks_to_display
+  field_type: select
+  name: Menus to Display
+  description: Select Meals
+  options:
+  - Breakfast: Breakfast
+  - Lunch: Lunch
+  - Pre-K Breakfast: Pre-K Breakfast
+  - Pre-K Lunch: Pre-K Lunch
+  multiple: true
+name: MealViewer
+refresh_interval: 1440
