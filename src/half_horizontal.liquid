@@ -15,11 +15,13 @@
         <div>
           <span class="my--2 label label--small label--underline">{{ block.blockName }}</span>
         </div>
-        <div class="">
+        <div class="richtext">
+          <div class="content clamp--nicely" data-content-limiter="true" data-content-max-height="{{ 70 | divided_by: blocks_to_display.size }}">
           {% assign grouped_items = block.cafeteriaLineList.data.first.foodItemList.data | group_by: 'item_Type' %}
           {% for group in grouped_items %}
-            <span class="description clamp--none">{{ group[0] }}: {{ group[1] | map: 'item_Name' | join: ', ' }}</span>
+            {{ group[1] | map: 'item_Name' | join: ', ' }};
           {% endfor %}
+          </div>
         </div>
         {% endif %}
         {% else %}
