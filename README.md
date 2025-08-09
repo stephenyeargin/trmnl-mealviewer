@@ -1,5 +1,9 @@
 # MealViewer for TRMNL
 
+[![Build and Release](https://github.com/stephenyeargin/trmnl-mealviewer/actions/workflows/build.yml/badge.svg)](https://github.com/stephenyeargin/trmnl-mealviewer/actions/workflows/build.yml)
+
+## Screenshot
+
 ![screenshot](assets/screenshot.png)
 
 ## Development
