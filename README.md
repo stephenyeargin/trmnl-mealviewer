@@ -2,6 +2,8 @@
 
 [![Build and Release](https://github.com/stephenyeargin/trmnl-mealviewer/actions/workflows/build.yml/badge.svg)](https://github.com/stephenyeargin/trmnl-mealviewer/actions/workflows/build.yml)
 
+![promo](assets/promo.png)
+
 ## Screenshot
 
 ![screenshot](assets/screenshot.png)
