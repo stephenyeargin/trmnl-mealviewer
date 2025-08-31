@@ -6,7 +6,7 @@ static_data: ''
 polling_verb: get
 polling_url: 'https://api.mealviewer.com/api/v4/school/{{ mealviewer_school_id }}/{{ ''now'' | date: ''%s'' | minus: 604800 | date: ''%Y-%m-%d'' }}/{{ ''now'' | date: ''%s'' | plus: 604800 | date: ''%Y-%m-%d'' }}/0'
 polling_headers: content-type=application/json
-polling_body: 
+polling_body: ''
 id: 133879
 custom_fields:
 - keyname: author_bio
@@ -19,7 +19,7 @@ custom_fields:
 - keyname: mealviewer_school_id
   field_type: string
   name: School ID
-  description: The identifier for the school, usually found in the URL.
+  description: The identifier for the school, usually <a href="https://schools.mealviewer.com/">found in the URL</a>.
   placeholder: SpringfieldElementary
 - keyname: mealviewer_blocks_to_display
   field_type: select
@@ -31,5 +31,5 @@ custom_fields:
   - Pre-K Breakfast: Pre-K Breakfast
   - Pre-K Lunch: Pre-K Lunch
   multiple: true
-name: MealViewer
+name: MealViewer (School Lunch)
 refresh_interval: 1440
