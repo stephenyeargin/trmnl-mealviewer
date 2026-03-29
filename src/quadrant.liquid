@@ -6,15 +6,13 @@
       {% if calendarDate == today %}
       <div class="col">
         <div class="p--1 bg--gray-6 text-stroke">
-          <span class="label">{{ day.dateInformation.weekDayName }}</span>
+          <span class="label label--base lg:label--large">{{ day.dateInformation.weekDayName }}</span>
         </div>
         {% for block in day.menuBlocks %}
         {% if blocks_to_display contains block.blockName %}
-        <div>
-          <span class="my--2 label label--small label--underline">{{ block.blockName }}</span>
-        </div>
-        <div>
-          <span data-clamp="{{ 7 | divided_by: blocks_to_display.size | round }}" class="description clamp--{{ 7 | divided_by: blocks_to_display.size | round }} clamp--nicely">
+        <div class="py--1">
+          <span class="label label--small lg:label--base label--underline">{{ block.blockName }}: </span>
+          <span class="description description--base lg:description--large">
           {% assign grouped_items = block.cafeteriaLineList.data.first.foodItemList.data | group_by: 'item_Type' %}
           {% for group in grouped_items %}
             {{ group[1] | map: 'item_Name' | join: ', ' }};
@@ -23,8 +21,8 @@
         </div>
         {% endif %}
         {% else %}
-        <div>
-          <span class="description py--5">No meals today.</span>
+        <div class="py--5 lg:py--10">
+          <span class="title title--base lg:title--large">No meals today.</span>
         </div>
         {% endfor %}
       </div>
@@ -36,5 +34,4 @@
 <div class="title_bar">
   <img class="image image-stroke--medium" src="data:image/svg+xml;base64,{{ logo_svg | base64_encode }}" />
   <span class="title">{{ physicalLocation.name }} </span>
-  <span class="instance">{{ trmnl.plugin_settings.instance_name }}</span>
 </div>

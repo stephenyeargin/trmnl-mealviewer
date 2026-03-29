@@ -1,34 +1,44 @@
 <div class="layout layout--row layout--top">
-  <div class="flex w--full gap--small">
+  <div class="flex w--full h--full gap--small lg:gap--medium">
     {% for day in menuSchedules %}
       {% if
         day.dateInformation.weekNumber == currentWeek and
         day.dateInformation.weekDay >= 2 and
         day.dateInformation.weekDay <= 6
       %}
-      <div class="col">
-        <div class="p--1 bg--gray-6 text-stroke">
-          <span class="label">{{ day.dateInformation.weekDayName }}</span>
-        </div>
-        {% for block in day.menuBlocks %}
-        {% if blocks_to_display contains block.blockName %}
-        <div>
-          <span class="my--2 label label--small label--underline">{{ block.blockName }}</span>
-        </div>
-        <div>
-          <span data-clamp="{{ 20 |  divided_by: blocks_to_display.size }}" class="description clamp--{{ 20 |  divided_by: blocks_to_display.size }} clamp--nicely">
-          {% assign grouped_items = block.cafeteriaLineList.data.first.foodItemList.data | group_by: 'item_Type' %}
-          {% for group in grouped_items %}
-            {{ group[1] | map: 'item_Name' | join: ', ' }};
+      <div class="col" style="display: grid; grid-template-rows: auto minmax(0, 1fr);">
+          <div class="p--1 bg--gray-6 text-stroke">
+            <span class="label label--base lg:label--large">{{ day.dateInformation.weekDayName }}</span>
+          </div>
+          {% assign block_count = 0 %}
+          {% for block in day.menuBlocks %}
+            {% if blocks_to_display contains block.blockName %}
+              {% assign block_count = block_count | plus: 1 %}
+            {% endif %}
           {% endfor %}
-          </span>
-        </div>
-        {% endif %}
-        {% else %}
-        <div>
-          <span class="description py--5">No meals today.</span>
-        </div>
-        {% endfor %}
+          {% if block_count > 0 %}
+          <div style="height: 100%; display: grid; grid-template-rows: repeat({{ block_count }}, minmax(0, 1fr));">
+            {% for block in day.menuBlocks %}
+              {% if blocks_to_display contains block.blockName %}
+              <div class="flex flex--col">
+                <div><span class="label label--small lg:label--base label--underline">{{ block.blockName }}</span></div>
+                <div class="content" data-content-limiter="true">
+                  <div class="description description--base lg:description--large">
+                    {% assign grouped_items = block.cafeteriaLineList.data.first.foodItemList.data | group_by: 'item_Type' %}
+                    {% for group in grouped_items %}
+                      {{ group[1] | map: 'item_Name' | join: ', ' | strip }};
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% else %}
+          <div>
+            <span class="title title--base lg:title--large">No meals today.</span>
+          </div>
+          {% endif %}
       </div>
       {% endif %}
     {% endfor %}
