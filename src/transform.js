@@ -9,6 +9,9 @@ function transform(input) {
     trmnl: {
       plugin_settings: {
         instance_name: input.trmnl?.plugin_settings?.instance_name
+      },
+      user: {
+        utc_offset: input.trmnl?.user?.utc_offset
       }
     },
 
@@ -16,7 +19,8 @@ function transform(input) {
       dateInformation: {
         weekNumber: day.dateInformation?.weekNumber,
         weekDay: day.dateInformation?.weekDay,
-        weekDayName: day.dateInformation?.weekDayName
+        weekDayName: day.dateInformation?.weekDayName,
+        dateFull: day.dateInformation?.dateFull
       },
 
       menuBlocks: (day.menuBlocks || []).map(block => ({
