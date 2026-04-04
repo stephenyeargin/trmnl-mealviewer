@@ -7,7 +7,7 @@
         day.dateInformation.weekDay <= 6
       %}
       <div class="col" style="display: grid; grid-template-rows: auto minmax(0, 1fr);">
-          <div class="p--1 bg--gray-6 text-stroke">
+          <div class="px--2 py--1 bg--gray-6 text-stroke rounded--xsmall">
             <span class="label label--base lg:label--large">{{ day.dateInformation.weekDayName }}</span>
           </div>
           {% assign block_count = 0 %}
@@ -35,8 +35,8 @@
             {% endfor %}
           </div>
           {% else %}
-          <div>
-            <span class="title title--base lg:title--large">No meals today.</span>
+          <div class="my--5 lg:my--10 text--center">
+            <span class="title title--small lg:title--base">No meals today.</span>
           </div>
           {% endif %}
       </div>

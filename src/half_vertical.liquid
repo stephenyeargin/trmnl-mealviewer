@@ -5,7 +5,7 @@
       {% assign today = 'now' | date: "%s" | plus: trmnl.user.utc_offset | date: '%Y-%m-%d' %}
       {% if calendarDate == today %}
       <div class="col">
-        <div class="p--1 bg--gray-6 text-stroke">
+        <div class="px--2 py--1 bg--gray-6 text-stroke rounded--xsmall">
           <span class="label label--base lg:label--large">{{ day.dateInformation.weekDayName }}</span>
         </div>
         {% for block in day.menuBlocks %}
@@ -23,9 +23,9 @@
         </div>
         {% endif %}
         {% else %}
-        <div class="py--5 lg:py--10">
-          <span class="title title--base lg:title--large">No meals today.</span>
-        </div>
+          <div class="my--5 lg:my--10 text--center">
+            <span class="title title--small lg:title--base">No meals today.</span>
+          </div>
         {% endfor %}
       </div>
       {% endif %}
