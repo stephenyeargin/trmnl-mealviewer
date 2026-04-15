@@ -14,6 +14,7 @@ custom_fields:
 - keyname: author_bio
   name: About This Plugin
   field_type: author_bio
+  category: education
   description: Shows school lunch menu via MealViewer.com
   github_url: https://github.com/stephenyeargin/trmnl-mealviewer
   learn_more_url: https://mealviewer.com
