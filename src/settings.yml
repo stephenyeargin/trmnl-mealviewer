@@ -33,6 +33,7 @@ custom_fields:
   - Lunch: Lunch
   - Pre-K Breakfast: Pre-K Breakfast
   - Pre-K Lunch: Pre-K Lunch
+  - Snack: Snack
   multiple: true
 name: MealViewer (School Lunch)
 refresh_interval: 1440

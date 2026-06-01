@@ -1,52 +1,36 @@
-<div class="layout layout--row layout--top">
-  <div class="flex w--full h--full gap--small lg:gap--medium">
-    {% for day in menuSchedules %}
-      {% if
-        day.dateInformation.weekNumber == currentWeek and
-        day.dateInformation.weekDay >= 2 and
-        day.dateInformation.weekDay <= 6
-      %}
-      <div class="col" style="display: grid; grid-template-rows: auto minmax(0, 1fr);">
-          <div class="px--2 py--1 bg--gray-6 text-stroke rounded--xsmall">
-            <span class="label label--base lg:label--large">{{ day.dateInformation.weekDayName }}</span>
-          </div>
-          {% assign block_count = 0 %}
-          {% for block in day.menuBlocks %}
-            {% if blocks_to_display contains block.blockName %}
-              {% assign block_count = block_count | plus: 1 %}
-            {% endif %}
-          {% endfor %}
-          {% if block_count > 0 %}
-          <div style="height: 100%; display: grid; grid-template-rows: repeat({{ block_count }}, minmax(0, 1fr));">
-            {% for block in day.menuBlocks %}
-              {% if blocks_to_display contains block.blockName %}
-              <div class="flex flex--col">
-                <div><span class="label label--small lg:label--base label--underline">{{ block.blockName }}</span></div>
-                <div class="content" data-content-limiter="true">
-                  <div class="description description--base lg:description--large">
-                    {% assign grouped_items = block.cafeteriaLineList.data.first.foodItemList.data | group_by: 'item_Type' %}
-                    {% for group in grouped_items %}
-                      {{ group[1] | map: 'item_Name' | join: ', ' | strip }};
-                    {% endfor %}
-                  </div>
-                </div>
+<div class="layout layout--top">
+  <div class="flex flex--col h--full w--full gap--small lg:gap--medium">
+    <div class="grid grid--cols-{{ weekDays.size }} gap--small lg:gap--medium">
+      {% for day in weekDays %}
+      <div class="px--2 py--1 bg--gray-6 text-stroke rounded--xsmall">
+        <span class="label label--base lg:label--large">{{ day.weekDayName }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="flex flex--col grow basis--0" style="min-height: 0;">
+      {% assign first_meal = true %}
+      {% for row in mealRows %}
+        {% if blocks_to_display contains row.blockName %}
+          {% unless first_meal %}<div class="divider"></div>{% endunless %}
+          <div class="grid grid--cols-{{ weekDays.size }} gap--small lg:gap--medium flex-auto" style="min-height: 0; max-height: 50%;">
+            {% for day in row.days %}
+            <div class="flex flex--col" style="overflow: hidden;">
+              <span class="label label--small lg:label--base label--underline">{{ row.blockName }}</span>
+              <div class="content">
+                <div class="description description--base lg:description--large">{{ day.text }}</div>
               </div>
-              {% endif %}
+            </div>
             {% endfor %}
           </div>
-          {% else %}
-          <div class="my--5 lg:my--10 text--center">
-            <span class="title title--small lg:title--base">No meals today.</span>
-          </div>
-          {% endif %}
-      </div>
-      {% endif %}
-    {% endfor %}
+          {% assign first_meal = false %}
+        {% endif %}
+      {% endfor %}
+    </div>
   </div>
 </div>
 
 <div class="title_bar">
   <img class="image image-stroke--medium" src="data:image/svg+xml;base64,{{ logo_svg | base64_encode }}" />
-  <span class="title">{{ physicalLocation.name }} </span>
+  <span class="title">{{ physicalLocation.name }}</span>
   <span class="instance">{{ trmnl.plugin_settings.instance_name }}</span>
 </div>
