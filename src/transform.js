@@ -96,8 +96,9 @@ function transform(input) {
       },
       user: { utc_offset: input.trmnl?.user?.utc_offset }
     },
-    weekDays: weekDays.map(day => ({ weekDayName: day.dateInformation.weekDayName })),
+    weekDays: weekDays.map(day => ({ weekDayName: day.dateInformation.weekDayName, weekDayDate: day.dateInformation.dateFull, dateKey: day.dateInformation.dateKey })),
     mealRows,
-    todayMeals
+    todayMeals,
+    today: todayDay.dateInformation
   };
 }

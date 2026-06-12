@@ -25,4 +25,5 @@
 <div class="title_bar">
   <img class="image image-stroke--medium" src="data:image/svg+xml;base64,{{ logo_svg | base64_encode }}" />
   <span class="title">{{ physicalLocation.name }}</span>
+  <span class="instance">{{ today.dateFull | date: '%A %-m/%-d' }}</span>
 </div>
