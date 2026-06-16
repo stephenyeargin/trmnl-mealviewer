@@ -19,6 +19,10 @@ function formatItems(items) {
   return Object.values(groups).map(names => names.join(', ')).join('; ');
 }
 
+function hasText(value) {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
 function sortByDisplayOrder(blockNames, displayOrder) {
   if (!displayOrder.length) return blockNames;
   return [...blockNames].sort((a, b) => {
@@ -66,11 +70,26 @@ function transform(input) {
 
   const orderedBlockNames = sortByDisplayOrder(blockNames, displayOrder);
 
+  const weekDayStates = weekDays.map(day => {
+    const wd = day.dateInformation.weekDay;
+    const dayBlocks = dayBlockMap[wd] || {};
+    const hasMeals = Object.values(dayBlocks).some(hasText);
+    return {
+      hasMeals,
+      statusLabel: hasMeals ? '' : 'No meal today.'
+    };
+  });
+
   const mealRows = orderedBlockNames.map(blockName => ({
     blockName,
-    days: weekDays.map(day => ({
-      text: dayBlockMap[day.dateInformation.weekDay][blockName] || ''
-    }))
+    days: weekDays.map((day, index) => {
+      const wd = day.dateInformation.weekDay;
+      return {
+        text: dayBlockMap[wd][blockName] || '',
+        hasMeals: weekDayStates[index].hasMeals,
+        statusLabel: weekDayStates[index].statusLabel
+      };
+    })
   }));
 
   const todayDay = weekDays.find(day =>
@@ -99,6 +118,7 @@ function transform(input) {
     weekDays: weekDays.map(day => ({ weekDayName: day.dateInformation.weekDayName, weekDayDate: day.dateInformation.dateFull, dateKey: day.dateInformation.dateKey })),
     mealRows,
     todayMeals,
+    todayHasMeals: todayMeals.some(meal => hasText(meal.text)),
     today: todayDay.dateInformation
   };
 }

@@ -1,14 +1,9 @@
 <div class="layout layout--row layout--top">
   <div class="flex flex--col w--full gap--small">
-    {% assign has_meals = false %}
-    {% for meal in todayMeals %}
-      {% if blocks_to_display contains meal.blockName %}{% assign has_meals = true %}{% endif %}
-    {% endfor %}
-
-    {% if has_meals %}
+    {% if todayHasMeals %}
       {% assign first_meal = true %}
       {% for meal in todayMeals %}
-        {% if blocks_to_display contains meal.blockName %}
+        {% if blocks_to_display contains meal.blockName and meal.text != blank %}
         {% unless first_meal %}<div class="divider"></div>{% endunless %}
         <div class="my--2">
           <span class="label label--small lg:label--base label--underline">{{ meal.blockName }}</span>
@@ -21,7 +16,7 @@
       {% endfor %}
     {% else %}
       <div class="my--5 lg:my--10 text--center">
-        <span class="title title--small lg:title--base">No meals today.</span>
+        <span class="title title--small">No meals today.</span>
       </div>
     {% endif %}
   </div>

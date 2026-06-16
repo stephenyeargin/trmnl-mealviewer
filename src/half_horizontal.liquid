@@ -23,7 +23,11 @@
             <div class="flex flex--col" style="overflow: hidden;">
               <span class="label label--small lg:label--base label--underline">{{ row.blockName }}</span>
               <div class="content">
+                {% if day.hasMeals == false %}
+                <span class="title title--small">{{ day.statusLabel }}</span>
+                {% else %}
                 <span class="description description--small">{{ day.text }}</span>
+                {% endif %}
               </div>
             </div>
             {% endfor %}
