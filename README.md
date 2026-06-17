@@ -1,6 +1,6 @@
 # MealViewer for TRMNL
 
-[![Build and Release](https://github.com/stephenyeargin/trmnl-mealviewer/actions/workflows/build.yml/badge.svg)](https://github.com/stephenyeargin/trmnl-mealviewer/actions/workflows/build.yml)
+[![Build and Release](https://github.com/stephenyeargin/trmnl-mealviewer/actions/workflows/build.yml/badge.svg)](https://github.com/stephenyeargin/trmnl-mealviewer/actions/workflows/build.yml) [![TRMNL Recipe Connections](https://trmnl-badges.gohk.xyz/badge/connections?recipe=133879)](https://trmnl.com/recipes/133879)
 
 ![promo](assets/promo.png)
 
