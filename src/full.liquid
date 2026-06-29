@@ -33,6 +33,10 @@
           </div>
           {% assign first_meal = false %}
         {% endif %}
+      {% else %}
+      <div class="py--5">
+        <span class="title title--base lg:title--xlarge">No meals this week.</span>
+      </div>
       {% endfor %}
     </div>
   </div>
