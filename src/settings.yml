@@ -36,4 +36,4 @@ custom_fields:
   - Snack: Snack
   multiple: true
 name: MealViewer (School Lunch)
-refresh_interval: 1440
+refresh_interval: 720
