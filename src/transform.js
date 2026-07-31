@@ -119,6 +119,6 @@ function transform(input) {
     mealRows,
     todayMeals,
     todayHasMeals: todayMeals.some(meal => hasText(meal.text)),
-    today: todayDay.dateInformation
+    today: todayDay?.dateInformation || {}
   };
 }
