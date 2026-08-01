@@ -36,5 +36,5 @@ custom_fields:
   - Snack: Snack
   multiple: true
 name: MealViewer (School Lunch)
-description: Today's school lunch menu from MealViewer
+description: Today's cafeteria menu
 refresh_interval: 720
